@@ -4,6 +4,8 @@ class Usuario < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :twitter]
+  #relacion con la tabla usuario
+  has_many :posts
   #para decirle al controlador que no tome el email para autenticar
   def email_required?
     false

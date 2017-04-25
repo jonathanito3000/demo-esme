@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  #validar que este logueado el usuario para crear un post
+  before_action :authenticate_usuario!, except: [:show, :index]
 
   # GET /posts
   # GET /posts.json
@@ -24,7 +26,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    #hace que coja el usuario que esta logueado para entrar
+    @post = current_usuario.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
