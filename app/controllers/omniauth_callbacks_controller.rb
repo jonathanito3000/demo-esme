@@ -37,7 +37,7 @@ class OmniauthCallbacksController < ApplicationController
 				 nombre: auth.info.name,
 				 apellido: "",
 				 username: auth.info.nickname,
-				 email: "auth.info.email",
+				 email: "",
 				 provider: auth.provider,
 				 uid:	auth.uid
 		}

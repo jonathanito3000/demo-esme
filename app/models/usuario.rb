@@ -4,6 +4,10 @@ class Usuario < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :twitter]
+  #para decirle al controlador que no tome el email para autenticar
+  def email_required?
+    false
+  end
 
   #validates es el metodo para realizar las validaciones con los campos de la BD
   validates :username, presence: true, uniqueness: true,
@@ -29,5 +33,7 @@ class Usuario < ApplicationRecord
 
   		  		
   		  	end  	
+
+          usuario
   end
 end
