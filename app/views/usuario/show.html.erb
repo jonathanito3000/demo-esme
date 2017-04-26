@@ -1,0 +1,5 @@
+<h1><%= @usuario.username%></br></h1>
+<%#para saber si se puede seguir o no%>
+	<% if usuario_signed_in? and current_usuario.can_follow?(@usuario.id)%>
+		<button class="btn btn-info" id="follow" data-friend = "<%= @usuario.id %>"><i class="fa fa-user"></i>Follow</button>
+	<%end%>

@@ -6,6 +6,23 @@ class Usuario < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:facebook, :twitter]
   #relacion con la tabla usuario
   has_many :posts
+  has_many :friendships
+  #se utiliza throught para hacer la referencia a la tabla que tendra la realcion y source para el campo que debe buscar
+  has_many :follows, through: :friendships, source: :usuario
+  has_many :followers_friendships, class_name: "Friendship", foreign_key: "usuario_id" 
+  has_many :followers, through: :followers_friendships, source: :friend
+
+  #metodo para seguir amigos
+  def follow!(amigo_id)
+    self.friendships.create!(friend_id: amigo_id)
+    
+  end
+  #validar que no se pueda seguir a la misma persona
+  def can_follow?(amigo_id)
+      not amigo_id == self.id or friendships.where(friend_id: amigo_id).size > 0
+
+    
+  end
   #para decirle al controlador que no tome el email para autenticar
   def email_required?
     false

@@ -32,6 +32,9 @@
                         <%= link_to "Editar Perfil", edit_usuario_registration_path(current_usuario) %>
                     </li>
                     <li>
+                        <%= link_to "Mi Perfil", current_usuario%>
+                    </li>
+                    <li>
                         <%#para destruir session es necesario llamar el metodo (method: :delete)%>
                         <%= link_to "Cerrar Sesion", destroy_usuario_session_path, method: :delete %>
                     </li>
